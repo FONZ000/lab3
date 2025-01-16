@@ -41,6 +41,11 @@ step() {
     "$path"/wait-for.sh -t 120 "http://localhost:$port/manage/health" -- echo "Host localhost:$port is active"
   fi
 
+  if [[ "$step" -eq 4 ]]; then
+    printf "Waiting for 40 seconds before executing step %d...\n" "$step"
+    sleep 40
+    #return
+  fi
   newman run \
     --delay-request=100 \
     --folder=step"$step" \
